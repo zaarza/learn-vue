@@ -1,10 +1,14 @@
 <script setup>
-const props = defineProps(['item']);
-const emit = defineEmits(['addItemToCart']);
+import { useFavoritesStore } from '../stores/favorites';
 
-const addItemToCart = () => {
-    emit('addItemToCart', props.item);
-};
+const props = defineProps(['item']);
+// const emit = defineEmits(['addItemToCart']);
+
+// const addItemToCart = () => {
+//     emit('addItemToCart', props.item);
+// };
+
+const { addItemToCart } = useFavoritesStore();
 </script>
 <template>
     <div
@@ -22,7 +26,7 @@ const addItemToCart = () => {
         </div>
 
         <button
-            @click="addItemToCart"
+            @click="addItemToCart(props.item)"
             class="px-5 text-sm py-2 rounded-md bg-sky-500 text-white w-fit active:scale-105"
         >
             Add to cart

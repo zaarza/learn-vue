@@ -1,41 +1,11 @@
 <script setup>
 import Card from './components/Card.vue';
 import { ref } from 'vue';
+import { useItemsStore } from './stores/items';
+import { useFavoritesStore } from './stores/favorites';
 
-const items = ref([
-    {
-        id: 1,
-        title: 'Pemrograman Dasar',
-        subtitle: 'Semester 1',
-        description:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam distinctio quisquam quod facere sint culpa! Vero fugit placeatrepellendus excepturi adipisci deleniti sint labore obcaecati sequi ad laboriosam nisi, debitis deserunt accusantium. Ullam nesciunt libero tempore fugit laboriosam! Voluptatum nihil, quas...',
-    },
-    {
-        id: 2,
-        title: 'Kalkulus',
-        subtitle: 'Semester 1',
-        description:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam distinctio quisquam quod facere sint culpa! Vero fugit placeatrepellendus excepturi adipisci deleniti sint labore obcaecati sequi ad laboriosam nisi, debitis deserunt accusantium. Ullam nesciunt libero tempore fugit laboriosam! Voluptatum nihil, quas...',
-    },
-]);
-
-const favorites = ref([]);
-
-const addItemToCart = (item) => {
-    const indexItem = favorites.value
-        .map((favorite) => favorite.id)
-        .indexOf(item.id);
-
-    if (indexItem > -1) {
-        favorites.value[indexItem].quantity++;
-    } else {
-        favorites.value.push({
-            id: item.id,
-            title: item.title,
-            quantity: 1,
-        });
-    }
-};
+const { items } = useItemsStore();
+const { favorites, addItemToCart } = useFavoritesStore();
 </script>
 <template>
     <div class="flex flex-wrap p-5 gap-3">
